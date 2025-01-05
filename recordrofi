@@ -93,7 +93,6 @@ startrec() {
 }
 
 mergefiles() {
-	sleep 5
 	cd $TMPDIR
 
 	COUNT=0
