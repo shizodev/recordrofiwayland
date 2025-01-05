@@ -13,7 +13,7 @@ Find your microphone there and change `$mic_source` variable in the `recordrofi`
 
 ## Installation
 ```
-$ git clone https://github.com/Andrey0189/recordrofi
+$ git clone https://github.com/shizodev/recordrofiwayland
 $ cd recordrofi
 $ chmod +x ./install-theme.sh recordrofi
 $ ./install-theme.sh
