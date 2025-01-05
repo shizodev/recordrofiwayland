@@ -135,3 +135,5 @@ then
 else
 	startrec
 fi
+
+#Wayland version made by ChatGPT
