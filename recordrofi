@@ -66,30 +66,26 @@ micrec() {
 
 
 startrec() {
-	SIZE="$(echo -e "Fullscreen\nArea" | prompt "Fullscreen or Area? (Esc = no video)")"
-	DESKAUDIO="$(echo -e "Yes\nNo" | prompt "Record desktop audio?")"
-	MIC="$(echo -e "Yes\nNo" | prompt "Record microphone?")"
+    SIZE="$(echo -e "Fullscreen\nArea" | prompt "Fullscreen or Area? (Esc = no video)")"
+    if [ -z "$SIZE" ]; then
+        echo "Режим записи не выбран. Отмена."
+        exit 1
+    fi
 
-	if [ $SIZE = "Fullscreen" ] 
-	then
-		screenrec
-	elif [ $SIZE = "Area" ]
-	then
-		arearec
-	fi
+    SOUND_OPTION="$(echo -e "Yes\nNo" | prompt "Record desktop audio?")"
+    MIC="$(echo -e "Yes\nNo" | prompt "Record desktop audio?")"
 
-	if [ $DESKAUDIO = "Yes" ]
-	then
-		audiodeskrec
-	fi
+    if [ "$SIZE" = "Fullscreen" ]; then
+        screenrec
+    elif [ "$SIZE" = "Area" ]; then
+        arearec
+    fi
 
-	if [ $MIC = "Yes" ]
-	then
-		micrec
-	fi
+    [ "$SOUND_OPTION" = "Yes" ] && audiodeskrec
+    [ "$MIC" = "Yes" ] && micrec
 
-	date '+%d-%m-%Y_%H:%M:%S' > /tmp/recdate
-	notify-send "Started recording"
+    date '+%d-%m-%Y_%H:%M:%S' > "$TMPDIR/recdate"
+    notify-send -t 1000  "Started recording"
 }
 
 mergefiles() {
